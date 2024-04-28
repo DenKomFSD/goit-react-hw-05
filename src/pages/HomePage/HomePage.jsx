@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchTrendingFilms } from "../../films-api";
+import MovieList from "../../components/MovieList/MovieList";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function Homepage() {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchFilms() {
@@ -10,7 +13,7 @@ export default function Homepage() {
         const films = await fetchTrendingFilms({ page: 1 });
         setMovies(films.data.results);
       } catch (error) {
-        console.log(error.message);
+        setError(true);
       } finally {
       }
     }
@@ -18,19 +21,9 @@ export default function Homepage() {
   }, []);
   return (
     <>
-      <h3>TRANDING TODAY</h3>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            {movie.backdrop_path && (
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-              />
-            )}
-            {movie.title}
-          </li>
-        ))}
-      </ul>
+      {movies.length > 0 && <h3>Tranding films this week! </h3>}
+      {movies.length > 0 && <MovieList movies={movies} />}
+      {error && <ErrorMessage />}
     </>
   );
 }

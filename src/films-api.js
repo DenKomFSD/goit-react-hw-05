@@ -11,7 +11,7 @@ const options = {
 };
 
 export const fetchTrendingFilms = async ({ page }) => {
-  const response = await axios.get(`trending/movie/week?page=${page}`, {
+  const response = await axios.get(`trending/movie/day?page=${page}`, {
     ...options,
     params: { page: page },
   });

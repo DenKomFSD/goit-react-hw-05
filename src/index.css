@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: black;
-  background-color: #2a77f1;
+  background: -webkit-linear-gradient(90deg, #151529, #e6e6e5, #008eba);
+  background: linear-gradient(90deg, #151529, #e6e6e5, #008eba);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
