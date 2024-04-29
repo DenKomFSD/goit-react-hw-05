@@ -6,8 +6,8 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { useParams } from "react-router-dom";
 
 export default function MovieDetailsPage() {
-  const [movie, setMovie] = useState(null);
-  const [err, setErr] = useState(false);
+  const [movies, setMovie] = useState(null);
+  const [error, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const { movieId } = useParams();
 
@@ -15,8 +15,9 @@ export default function MovieDetailsPage() {
     async function fetchDetailes() {
       try {
         setLoading(true);
-        const details = await fetchFilmDetails({ id: movieId });
-        setMovie(details);
+        const data = await fetchFilmDetails(movieId);
+        setMovie(data);
+        console.log(data);
       } catch (error) {
         setErr(true);
       } finally {
@@ -28,9 +29,9 @@ export default function MovieDetailsPage() {
   }, [movieId]);
   return (
     <>
-      {err && <NotFoundPage />}
+      {error && <NotFoundPage />}
       {loading && <Loader />}
-      <h3>Details {movieId} </h3>
+      <p>{movies.data.overview}</p>
     </>
   );
 }
