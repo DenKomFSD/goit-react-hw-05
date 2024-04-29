@@ -17,5 +17,5 @@ export const fetchTrendingFilms = async () => {
 
 export const fetchFilmDetails = async (id) => {
   const response = await axios.get(`movie/${id}`, options);
-  return response;
+  return response.data;
 };

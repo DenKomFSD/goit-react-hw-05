@@ -1,0 +1,14 @@
+.box {
+  display: flex;
+  flex-direction: row;
+  width: 1280px;
+  padding: 20px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-left: 20px;
+  width: 800px;
+}

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import css from "./MovieList.module.css";
 
 export default function MovieList({ movies }) {
+  const defaultImg =
+    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
   return (
     <>
       <div className={css.wrapper}>
@@ -11,8 +13,14 @@ export default function MovieList({ movies }) {
               <Link to={`/movies/${movie.id}`}>
                 {movie.backdrop_path && (
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : defaultImg
+                    }
                     className={css.photo}
+                    width="233px"
+                    height="350px"
                   />
                 )}
                 <p className={css.title}>{movie.title}</p>
