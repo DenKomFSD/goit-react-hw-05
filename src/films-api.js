@@ -10,10 +10,12 @@ const options = {
   },
 };
 
-export const fetchTrendingFilms = async ({ page }) => {
-  const response = await axios.get(`trending/movie/day?page=${page}`, {
-    ...options,
-    params: { page: page },
-  });
+export const fetchTrendingFilms = async () => {
+  const response = await axios.get("trending/movie/day", options);
+  return response;
+};
+
+export const fetchFilmDetails = async ({ id }) => {
+  const response = await axios.get(`movie/${id}`, options);
   return response;
 };
