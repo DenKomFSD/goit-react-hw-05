@@ -15,10 +15,7 @@ export default function MovieCast() {
       try {
         setLoading(true);
         const data = await fetchCast(movieId);
-
         setActors(data.cast);
-
-        // console.log(actors);
       } catch (error) {
         setError(true);
       } finally {
@@ -28,6 +25,7 @@ export default function MovieCast() {
     }
     getDetails();
   }, [movieId]);
+  console.log(actors);
   return (
     <>
       {error && <NotFoundPage />}
@@ -35,15 +33,18 @@ export default function MovieCast() {
       {actors.length > 0 && (
         <ul>
           {actors.map((actor) => {
-            <li key={actor.id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                alt=""
-              />
-              <div>
-                <p>{actor.name}</p>
-              </div>
-            </li>;
+            return (
+              <li key={actor.id}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                  alt=""
+                  width="190px"
+                />
+                <div>
+                  <p>{actor.name}</p>
+                </div>
+              </li>
+            );
           })}
         </ul>
       )}
