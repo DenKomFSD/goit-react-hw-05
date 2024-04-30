@@ -3,7 +3,7 @@ import { fetchFilmDetails } from "../../films-api";
 
 import Loader from "../../components/Loader/Loader";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import css from "./MoviesDetaisPage.module.css";
 
 export default function MovieDetailsPage() {
@@ -18,7 +18,6 @@ export default function MovieDetailsPage() {
         setLoading(true);
         const data = await fetchFilmDetails(movieId);
         setMovie(data);
-        console.log(data);
       } catch (error) {
         setErr(true);
       } finally {
@@ -33,9 +32,9 @@ export default function MovieDetailsPage() {
   const genres = movies.genres || [];
   return (
     <>
+      {<button className={css.btn}>go back</button>}
       <section className={css.box}>
         <div>
-          {<button>go back</button>}
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt=""
@@ -51,7 +50,18 @@ export default function MovieDetailsPage() {
           <h5>Genres</h5>
           <p>{genres.map((genre) => genre.name).join(", ")}</p>
         </div>
-        <hr />
+      </section>
+      <hr />
+      <section>
+        <ul className={css.nav}>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="review">Review</Link>
+          </li>
+        </ul>
+        <Outlet />
       </section>
       {error && <NotFoundPage />}
       {loading && <Loader />}
