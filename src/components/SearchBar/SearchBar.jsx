@@ -3,6 +3,7 @@ export default function SearchBar({ searchValue, onSubmit }) {
     event.preventDefault();
     const form = event.target;
     const value = form.query.value;
+    console.log(value);
     // console.log(event.target.query);
     // if (!value) {
     //   toast.error("Your search term is empty", {
@@ -18,7 +19,6 @@ export default function SearchBar({ searchValue, onSubmit }) {
   };
   return (
     <>
-      <h4>Movies Page Test</h4>
       <form onSubmit={onSearch}>
         <input
           type="text"
