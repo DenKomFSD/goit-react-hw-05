@@ -61,8 +61,11 @@ export default function MovieDetailsPage() {
             <Link to="review">Review</Link>
           </li>
         </ul>
+        <hr />
+
         <Outlet />
       </section>
+
       {error && <NotFoundPage />}
       {loading && <Loader />}
     </>

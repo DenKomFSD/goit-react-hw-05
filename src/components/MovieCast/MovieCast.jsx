@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchCast } from "../../films-api";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import Loader from "../Loader/Loader";
+import css from "../MovieCast/MovieCast.module.css";
 
 export default function MovieCast() {
   const { movieId } = useParams();
@@ -10,6 +11,8 @@ export default function MovieCast() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const defaultImg =
+    "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg";
   useEffect(() => {
     async function getDetails() {
       try {
@@ -25,18 +28,22 @@ export default function MovieCast() {
     }
     getDetails();
   }, [movieId]);
-  console.log(actors);
+
   return (
     <>
       {error && <NotFoundPage />}
       {loading && <Loader />}
       {actors.length > 0 && (
-        <ul>
+        <ul className={css.box}>
           {actors.map((actor) => {
             return (
               <li key={actor.id}>
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                  src={
+                    actor.profile_path
+                      ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                      : defaultImg
+                  }
                   alt=""
                   width="190px"
                 />

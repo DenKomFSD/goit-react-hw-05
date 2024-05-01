@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 12px;
+  margin-bottom: 48px;
+  margin-top: 24px;
+}
+
+.item {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ffff;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.item::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.6); /* Цвет ползунка при наведении */
+}
