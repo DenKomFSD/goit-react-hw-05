@@ -12,14 +12,12 @@ export default function MoviesPage() {
   const [movies, setFilms] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const [searchValue, setSearchValue] = useState("");
-  // const [page, setPage] = useState(1);
+
   const [params, setParams] = useSearchParams();
   const userParams = params.get("query") ?? "";
 
   const handleSubmit = (newSearch) => {
     params.set("query", newSearch);
-    // setSearchValue(query);
     setParams(params);
   };
 
@@ -32,7 +30,6 @@ export default function MoviesPage() {
       try {
         setLoading(true);
         const data = await searchMovie(userParams);
-
         setFilms(data);
         setError(false);
         if (data.length === 0) {

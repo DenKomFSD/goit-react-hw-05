@@ -1,6 +1,13 @@
 .link {
   color: aliceblue;
 }
+.link:hover {
+  color: #007bff;
+  background-color: #f8f9fa; /* Изменяем фон при наведении */
+  border-radius: 5px; /* Добавляем скругление краев */
+  transform: scale(1.1); /* Увеличиваем размер при наведении */
+  padding: 6px 12px;
+}
 .active {
   color: orange;
 }

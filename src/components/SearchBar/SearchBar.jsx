@@ -1,17 +1,20 @@
-// import { toast } from "react-hot-toast";
+import css from "./SearchBar.module.css";
 
 export default function SearchBar({ value, onFilter }) {
   return (
     <>
-      <form>
+      <form className={css.formblock}>
         <input
+          className={css.search}
           type="text"
           placeholder="Search films.."
           name="query"
           value={value}
           onChange={(e) => onFilter(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button className={css.bttn} type="submit">
+          Search
+        </button>
       </form>
     </>
   );

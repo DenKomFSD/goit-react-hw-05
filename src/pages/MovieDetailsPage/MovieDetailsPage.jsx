@@ -1,14 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { fetchFilmDetails } from "../../films-api";
 
 import Loader from "../../components/Loader/Loader";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import css from "./MoviesDetaisPage.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function MovieDetailsPage() {
   const location = useLocation();
-  const backLinkRef = useRef(location.state);
+  const backLinkRef = useRef(location.state ?? "/movies");
   const [movies, setMovie] = useState([]);
   const [error, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,13 +23,22 @@ export default function MovieDetailsPage() {
         setMovie(data);
       } catch (error) {
         setErr(true);
+        toast.error("An error occurred while fetching movie details.");
       } finally {
         setLoading(false);
-        setErr(false);
       }
     }
     fetchDetailes();
   }, [movieId]);
+
+  if (loading || error || !movies) {
+    return (
+      <>
+        {error && <NotFoundPage />}
+        {loading && <Loader />}
+      </>
+    );
+  }
 
   const userScore = Math.round(movies.vote_average * 10);
   const genres = movies.genres || [];
@@ -60,20 +70,19 @@ export default function MovieDetailsPage() {
       <hr />
       <section>
         <ul className={css.nav}>
-          <li>
+          <li className={css.btn}>
             <Link to="cast">Cast</Link>
           </li>
-          <li>
+          <li className={css.btn}>
             <Link to="review">Review</Link>
           </li>
         </ul>
         <hr />
-
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </section>
-
-      {error && <NotFoundPage />}
-      {loading && <Loader />}
+      <Toaster position="top-right" containerStyle={{ zIndex: 99999999 }} />
     </>
   );
 }
