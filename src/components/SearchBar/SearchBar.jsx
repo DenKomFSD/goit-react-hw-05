@@ -1,30 +1,32 @@
-export default function SearchBar({ searchValue, onSubmit }) {
-  const onSearch = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const value = form.query.value;
-    console.log(value);
-    // console.log(event.target.query);
-    // if (!value) {
-    //   toast.error("Your search term is empty", {
-    //     style: {
-    //       color: "#ffffff",
-    //       backgroundColor: "red",
-    //     },
-    //   });
-    //   return;
-    // }
-    onSubmit(value);
-    // form.reset();
-  };
+// import { toast } from "react-hot-toast";
+
+export default function SearchBar({ value, onFilter }) {
+  // const onSearch = (event) => {
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   const value = form.query.value;
+
+  //   if (!value) {
+  //     toast.error("Your search term is empty", {
+  //       style: {
+  //         color: "#ffffff",
+  //         backgroundColor: "red",
+  //       },
+  //     });
+  //     return;
+  //   }
+  //   onSubmit(value);
+  //   // form.reset();
+  // };
   return (
     <>
-      <form onSubmit={onSearch}>
+      <form>
         <input
           type="text"
           placeholder="Search films.."
           name="query"
-          value={searchValue}
+          value={value}
+          onChange={(e) => onFilter(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>
