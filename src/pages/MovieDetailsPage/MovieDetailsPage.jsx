@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchFilmDetails } from "../../films-api";
 
 import Loader from "../../components/Loader/Loader";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import css from "./MoviesDetaisPage.module.css";
 
 export default function MovieDetailsPage() {
+  const location = useLocation();
+  const backLinkRef = useRef(location.state);
   const [movies, setMovie] = useState([]);
   const [error, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,14 +34,18 @@ export default function MovieDetailsPage() {
   const genres = movies.genres || [];
   return (
     <>
-      {<button className={css.btn}>go back</button>}
+      {
+        <div className={css.btn}>
+          <Link to={backLinkRef.current}>Go back</Link>
+        </div>
+      }
       <section className={css.box}>
         <div>
           <img
             src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
             alt=""
-            width="350px"
-            height="500px"
+            width="250px"
+            height="350px"
           />
         </div>
         <div className={css.info}>
