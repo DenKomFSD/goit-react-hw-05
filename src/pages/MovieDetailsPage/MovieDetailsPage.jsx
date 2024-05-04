@@ -3,7 +3,13 @@ import { fetchFilmDetails } from "../../films-api";
 
 import Loader from "../../components/Loader/Loader";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import css from "./MoviesDetaisPage.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -71,10 +77,10 @@ export default function MovieDetailsPage() {
       <section>
         <ul className={css.nav}>
           <li className={css.btn}>
-            <Link to="cast">Cast</Link>
+            <NavLink to="cast">Cast</NavLink>
           </li>
           <li className={css.btn}>
-            <Link to="review">Review</Link>
+            <NavLink to="review">Review</NavLink>
           </li>
         </ul>
         <hr />

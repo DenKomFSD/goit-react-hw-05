@@ -22,7 +22,6 @@ export default function MovieReviews() {
         setError(true);
       } finally {
         setLoading(false);
-        setError(false);
       }
     }
     getReview();
